@@ -1,0 +1,4 @@
+mode,monthly_pass,trip,source,date_checked
+train,260,Rutherford to New York Penn Station,njtransit.com Fare Finder,2026-11-06
+bus,150,Rutherford to Port Authority Bus Terminal,njtransit.com Fare Finder,2026-11-06
+car,NA,No monthly pass,NA,NA

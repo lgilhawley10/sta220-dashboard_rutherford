@@ -1,0 +1,10 @@
+geo_id,place,mode,riders,commuters,pct,monthly_pass,trip,source,date_checked
+3400365280,Rutherford,car,5547,7812,71,NA,No monthly pass,NA,NA
+3400365280,Rutherford,bus,1039,7812,13.3,150,Rutherford to Port Authority Bus Terminal,njtransit.com Fare Finder,2026-11-06
+3400365280,Rutherford,train,474,7812,6.1,260,Rutherford to New York Penn Station,njtransit.com Fare Finder,2026-11-06
+34003,Bergen County,car,322994,396813,81.4,NA,No monthly pass,NA,NA
+34003,Bergen County,bus,36297,396813,9.1,150,Rutherford to Port Authority Bus Terminal,njtransit.com Fare Finder,2026-11-06
+34003,Bergen County,train,8652,396813,2.2,260,Rutherford to New York Penn Station,njtransit.com Fare Finder,2026-11-06
+34,New Jersey,car,3202883,3811377,84,NA,No monthly pass,NA,NA
+34,New Jersey,bus,185536,3811377,4.9,150,Rutherford to Port Authority Bus Terminal,njtransit.com Fare Finder,2026-11-06
+34,New Jersey,train,76601,3811377,2,260,Rutherford to New York Penn Station,njtransit.com Fare Finder,2026-11-06
