@@ -45,7 +45,7 @@ fig1 <- ggplot(
     title    = "Rutherford commuters ride the bus at almost 3 times the state rate",
     subtitle = "Percent of commuters who get to work each way",
     x        = "Percent of commuters, 2020-2024",
-    y        = NULL,
+    y        = "Place",
     caption  = "Source: U.S. Census Bureau, American Community Survey 2020-2024 (5-year), table B08301.",
     alt      = paste(
       "Bar chart in three panels: bus, car, and train, each showing the percent of commuters in",
