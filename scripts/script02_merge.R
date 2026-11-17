@@ -1,5 +1,5 @@
 # scripts/02_merge.R
-# Puts my two clean sources together: how Rutherford, Bergen County, and New Jersey get to work
+# Puts my two clean sources together: how Rutherford, Bergen County get to work
 
 
 # Packages and Load the Data ---------------------------------------------------------------------
@@ -17,19 +17,13 @@ dim(commute)
 names(commute)
 summary(commute)
 
-# The benchmarks, made by 01_import.R. Expect 1 row and 8 columns each.
+# The benchmark, made by 01_import.R. Expect 1 row and 8 columns each.
 commute_bergen <- read_csv(
   "data/commute_clean_bergen.csv",
   col_types = cols(geo_id = col_character())
 )
 
-commute_nj <- read_csv(
-  "data/commute_clean_nj.csv",
-  col_types = cols(geo_id = col_character())
-)
-
 dim(commute_bergen)
-dim(commute_nj)
 
 # Source 2, made by 01_import.R.
 fares <- read_csv("data/fares_clean.csv")
@@ -39,13 +33,13 @@ dim(fares)
 names(fares)
 summary(fares)
 
-# Rutherford and the two benchmarks, stacked into one table
+# Rutherford and the benchmark, stacked into one table
 three_places <- commute |>
   filter(str_detect(name, "^Rutherford borough")) |>
-  bind_rows(commute_bergen, commute_nj) |>
+  bind_rows(commute_bergen) |>
   mutate(place = str_remove_all(name, " borough|, Bergen County|, New Jersey"))   # short names for the labels
 
-# Expect 3 rows: Rutherford, Bergen County, New Jersey
+# Expect 2 rows: Rutherford, Bergen County
 dim(three_places)
 three_places$place
 
@@ -59,7 +53,7 @@ mode_share <- three_places |>
   mutate(pct = round(riders / commuters * 100, 1)) |> 
   select(geo_id, place, mode, riders, commuters, pct)
 
-# One row is one place and one mode. Expect 9 rows (3 places x 3 modes) and 6 columns
+# One row is one place and one mode. Expect 6 rows (2 places x 3 modes) and 6 columns
 dim(mode_share)
 names(mode_share)
 summary(mode_share)
@@ -99,7 +93,7 @@ fares |>
 # Predict, Then Check (Step 5) -------------------------------------------------------------------
 
 # Before the merge, what I expect:
-# 1) Rows: 9, the same as mode_share (mode_share is the left table)
+# 1) Rows: 6, the same as mode_share (mode_share is the left table)
 # 2) Columns: 6 (mode_share) + 4 (5 in fares - the key) = 10
 # 3) Drops: none
 
@@ -115,7 +109,7 @@ anti_join(fares, mode_share, by = "mode")   # expect 0 rows
 commute_merged <- mode_share |>
   left_join(fares, by = "mode")
 
-# Three checks after the merge: expect 9 rows and 10 columns, and NA in monthly_pass only for car
+# Three checks after the merge: expect 6 rows and 10 columns, and NA in monthly_pass only for car
 dim(commute_merged)
 names(commute_merged)
 summary(commute_merged)
@@ -127,3 +121,4 @@ commute_merged |>
 # Save (Step 6) ----------------------------------------------------------------------------------
 
 write_csv(commute_merged, "data/commute_merged.csv")
+write_csv(commute_merged, "app/data/commute_merged.csv")
